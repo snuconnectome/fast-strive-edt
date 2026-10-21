@@ -1,0 +1,156 @@
+{
+  "hardware": {
+    "gpu_cluster_node": "DGX-1 (8x NVIDIA Tesla V100-SXM2-16GB, 128 GB HBM2 VRAM)",
+    "cpu_cluster_node": "64-Core Dual AMD EPYC Compute Node",
+    "pytorch_version": "2.5.1+cu121",
+    "triton_version": "3.1.0",
+    "scipy_version": "1.14.1"
+  },
+  "synthetic_phantom_and_grid_scaling_benchmarks": {
+    "anisotropic_spacing_mm": [1.0, 1.2, 0.9],
+    "grid_112x136x112_cropped_ventricle_roi": {
+      "scipy_cpu_1core_ms": 124.40,
+      "triton_cuda_1xV100_ms": 0.86,
+      "speedup": 144.5,
+      "max_abs_err_mm": 8.17e-6,
+      "pv_10mm_dice": 1.00000000
+    },
+    "grid_160x192x160_whole_brain_crop": {
+      "scipy_cpu_1core_ms": 408.43,
+      "triton_cuda_1xV100_ms": 3.68,
+      "speedup": 110.9,
+      "max_abs_err_mm": 1.02e-5,
+      "pv_10mm_dice": 1.00000000
+    },
+    "grid_256x256x256_conformed_volume": {
+      "scipy_cpu_1core_ms": 2371.37,
+      "pytorch_cuda_chunked_1xV100_ms": 179.12,
+      "pytorch_cuda_chunked_peak_vram_mb": 531.3,
+      "triton_cuda_1xV100_ms": 11.42,
+      "speedup": 207.6,
+      "max_abs_err_mm": 1.51e-5,
+      "pv_10mm_dice": 1.00000000
+    }
+  },
+  "real_brain_cohort_benchmark_500_scans": {
+    "n_scans_evaluated": 500,
+    "uncropped_256x256x256_scipy_1core_ms_per_scan": 2371.370,
+    "cropped_bbox_scipy_1core_ms_per_scan": 183.894,
+    "cropped_bbox_scipy_32core_ms_per_scan": 20.186,
+    "cropped_bbox_pytorch_cuda_1xV100_warm_ms_per_scan": 44.856,
+    "cropped_bbox_triton_cuda_1xV100_cold_jit_ms_per_scan": 9.664,
+    "cropped_bbox_triton_cuda_1xV100_warm_ms_per_scan": 2.443,
+    "speedup_bbox_pruning_on_cpu": 12.90,
+    "speedup_triton_warm_vs_cropped_scipy_1core": 75.27,
+    "speedup_triton_warm_vs_uncropped_scipy_1core": 970.68,
+    "max_abs_error_mm_across_100_full_3d_volumes": 3.8147e-6,
+    "mean_rmse_mm_across_100_full_3d_volumes": 9.1376e-7,
+    "mean_pv_10mm_dice_across_100_volumes": 1.00000000,
+    "min_pv_10mm_dice_across_100_volumes": 1.00000000,
+    "pv_10mm_integer_voxel_count_exact_match_rate_500": 1.0000
+  },
+  "full_cohort_4176_sessions_execution": {
+    "n_sessions_total": 4176,
+    "n_unique_subjects": 1935,
+    "n_sessions_ok": 4176,
+    "multi_gpu_8xV100_wall_time_sec": 27.226,
+    "multi_gpu_effective_ms_per_scan": 6.520,
+    "multi_gpu_throughput_scans_per_sec": 153.4,
+    "operations_per_scan": "3x 3D Anisotropic EDT (strict lateral ventricles, full ventricles, cerebral cortex) + 3D 26-Connected-Component Topology + Zlib Decompression",
+    "max_off_diag_affine_shear": 8.9407e-8
+  },
+  "cohort_volumetric_and_sensitivity_analysis_4176": {
+    "fs_stats_partial_volume_total_mean_mm3": 3972.38,
+    "fs_stats_partial_volume_total_sd_mm3": 4520.61,
+    "fs_stats_partial_volume_total_median_mm3": 2443.30,
+    "fs_stats_partial_volume_total_iqr_mm3": 3334.12,
+    "discrete_mask_total_mean_mm3": 3911.18,
+    "discrete_mask_total_sd_mm3": 4364.73,
+    "discrete_mask_total_median_mm3": 2478.50,
+    "pearson_r_fs_stats_vs_discrete_mask": 0.998822,
+    "pv_strict_10mm_mean_mm3": 3686.32,
+    "pv_strict_10mm_sd_mm3": 3948.07,
+    "deep_strict_10mm_mean_mm3": 286.06,
+    "deep_strict_10mm_sd_mm3": 771.32,
+    "mean_pv_frac_strict_4_43_at_3mm": 0.7828,
+    "mean_pv_frac_strict_4_43_at_10mm": 0.9489,
+    "mean_pv_frac_strict_4_43_at_13mm": 0.9661,
+    "mean_pv_frac_full_4_43_5_44_14_at_10mm": 0.9493,
+    "mean_pv_frac_26cc_continuity_3mm_seed": 0.9372,
+    "mean_juxtacortical_4mm_frac_of_total": 0.0299,
+    "mean_deep_subcortical_frac_of_total": 0.0213,
+    "mean_lesion_clusters_per_scan": 70.01,
+    "median_lesion_clusters_per_scan": 67.0,
+    "volumetric_burden_tier_counts": {
+      "tier_0_lt_500mm3": 18,
+      "tier_1_500_to_3000mm3": 2426,
+      "tier_2_3000_to_10000mm3": 1410,
+      "tier_3_ge_10000mm3": 322
+    },
+    "qc_flag_counts": {
+      "PASS": 4168,
+      "WARN": 8,
+      "FAIL": 0
+    }
+  },
+  "paired_raw_flair_vs_t1_validation_N62_unique_subjects_75_sessions": {
+    "n_paired_sessions": 75,
+    "n_unique_subjects_deduplicated": 62,
+    "diagnostic_stratification_sessions": {
+      "CN": 25,
+      "MCI": 25,
+      "DEM": 25
+    },
+    "diagnostic_stratification_unique_subjects": {
+      "CN": 25,
+      "MCI": 25,
+      "DEM": 12
+    },
+    "coregistration_and_segmentation_protocol": "Scanner-world RAS affine co-registration (M_flair^-1 @ M_aseg) inside FreeSurfer Cerebral White Matter union (labels [2, 41, 77]) with a 2-voxel (2.0 mm) cortical grey-matter ribbon partial-volume guard (accounting for 5.0 mm 2D axial FLAIR slice thickness) while preserving the ventricular wall un-eroded. Strictly T1-independent FLAIR segmentation via physical FLAIR-to-NAWM contrast ratio (I_FLAIR >= 1.35 * median_NAWM) and 3D 26-CC minimum cluster >= 4 voxels.",
+    "by_group_unique_subject_medians_mm3": {
+      "CN": 2621.0,
+      "MCI": 5029.0,
+      "DEM": 6236.5
+    },
+    "unique_subjects_N62": {
+      "flair_wmh_mean_mm3": 4497.16,
+      "flair_wmh_sd_mm3": 2484.34,
+      "flair_wmh_median_mm3": 3999.00,
+      "t1_fs_stats_mean_mm3": 2774.06,
+      "t1_fs_stats_sd_mm3": 3226.66,
+      "t1_fs_stats_median_mm3": 1711.55,
+      "t1_to_flair_volume_ratio_median": 0.4559,
+      "flair_pv_10mm_frac_mean": 0.5022,
+      "flair_deep_10mm_frac_mean": 0.4978,
+      "t1_pv_10mm_frac_mean": 0.9421,
+      "t1_deep_10mm_frac_mean": 0.0579,
+      "dice_3d_exact_mean": 0.2006,
+      "dice_3d_3mm_tol_mean": 0.4182,
+      "t1_precision_within_3mm_flair_mean": 0.6232,
+      "mean_dist_t1_to_flair_mm": 4.468,
+      "pearson_r_raw_vol": 0.4993,
+      "pearson_p_raw_vol": 3.6166e-5,
+      "pearson_r_log_vol": 0.6475,
+      "pearson_p_log_vol": 1.2904e-8,
+      "spearman_rho_vol": 0.6531,
+      "spearman_p_vol": 8.7683e-9
+    },
+    "all_sessions_N75": {
+      "flair_wmh_mean_mm3": 4809.39,
+      "flair_wmh_sd_mm3": 2619.36,
+      "flair_wmh_median_mm3": 4510.00,
+      "t1_fs_stats_mean_mm3": 2931.48,
+      "t1_fs_stats_sd_mm3": 3139.71,
+      "t1_fs_stats_median_mm3": 1808.10,
+      "t1_to_flair_volume_ratio_median": 0.4563,
+      "flair_pv_10mm_frac_mean": 0.4744,
+      "t1_pv_10mm_frac_mean": 0.9411,
+      "pearson_r_raw_vol": 0.5367,
+      "pearson_p_raw_vol": 6.9134e-7,
+      "pearson_r_log_vol": 0.6601,
+      "pearson_p_log_vol": 1.1801e-10,
+      "spearman_rho_vol": 0.6697,
+      "spearman_p_vol": 5.0318e-11
+    }
+  }
+}

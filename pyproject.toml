@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fast-strive-edt"
+version = "0.1.0"
+description = "Exact 2D-Tiled Triton/PyTorch CUDA 3D Euclidean Distance Transform and STRIVE White-Matter Lesion Spatial Partitioning"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "SNU Connectome Lab", email = "connectome@snu.ac.kr"}
+]
+keywords = [
+    "neuroimaging",
+    "white-matter-hyperintensity",
+    "WMH",
+    "STRIVE-2",
+    "euclidean-distance-transform",
+    "CUDA",
+    "Triton",
+    "PyTorch",
+    "FreeSurfer"
+]
+dependencies = [
+    "numpy>=1.22",
+    "scipy>=1.9",
+    "pandas>=1.5",
+]
+
+[project.optional-dependencies]
+nifti = ["nibabel>=4.0"]
+gpu = ["torch>=2.0", "triton>=2.1"]
+dev = ["pytest>=7.0", "nibabel>=4.0"]
+
+[project.scripts]
+fast-strive-edt = "fast_strive_edt.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
